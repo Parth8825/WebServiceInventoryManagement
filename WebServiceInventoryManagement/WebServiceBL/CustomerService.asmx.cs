@@ -17,6 +17,20 @@ namespace WebServiceBL
     // [System.Web.Script.Services.ScriptService]
     public class CustomerService : System.Web.Services.WebService
     {
+        [WebMethod]
+        public List<CustomerBO> GetCustomer()
+        {
+            List<CustomerBO> customer = new List<CustomerBO>();
+            try
+            {
+                CustomerDA dataAccess = new CustomerDA();
+                return dataAccess.GetCustomerData();
+            }
+            catch
+            {
+                return customer;
+            }
+        }
 
         [WebMethod]
         public int InsertNewCustomer(CustomerBO newCustomer)

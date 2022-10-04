@@ -17,6 +17,20 @@ namespace WebServiceBL
     // [System.Web.Script.Services.ScriptService]
     public class OrderService : System.Web.Services.WebService
     {
+        [WebMethod]
+        public List<OrderBO> GetOrder()
+        {
+            List<OrderBO> order = new List<OrderBO>();
+            try
+            {
+                OrderDA dataAccess = new OrderDA();
+                return dataAccess.GetOrderData();
+            }
+            catch
+            {
+                return order;
+            }
+        }
 
         [WebMethod]
         public int InsertNewOrder(OrderBO newOrder)

@@ -30,7 +30,7 @@ namespace WebServiceInventoryManagement.SalesmanServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CityField;
         
-        private float CommisionField;
+        private double CommisionField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -82,7 +82,7 @@ namespace WebServiceInventoryManagement.SalesmanServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public float Commision {
+        public double Commision {
             get {
                 return this.CommisionField;
             }
@@ -108,6 +108,13 @@ namespace WebServiceInventoryManagement.SalesmanServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SalesmanServiceReference.SalesmanServiceSoap")]
     public interface SalesmanServiceSoap {
         
+        // CODEGEN: Generating message contract since element name GetSalesmanResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSalesman", ReplyAction="*")]
+        WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponse GetSalesman(WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSalesman", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponse> GetSalesmanAsync(WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest request);
+        
         // CODEGEN: Generating message contract since element name newSalesman from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertNewSalesman", ReplyAction="*")]
         WebServiceInventoryManagement.SalesmanServiceReference.InsertNewSalesmanResponse InsertNewSalesman(WebServiceInventoryManagement.SalesmanServiceReference.InsertNewSalesmanRequest request);
@@ -128,6 +135,67 @@ namespace WebServiceInventoryManagement.SalesmanServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteSalesman", ReplyAction="*")]
         System.Threading.Tasks.Task<WebServiceInventoryManagement.SalesmanServiceReference.DeleteSalesmanResponse> DeleteSalesmanAsync(WebServiceInventoryManagement.SalesmanServiceReference.DeleteSalesmanRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetSalesmanRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSalesman", Namespace="http://tempuri.org/", Order=0)]
+        public WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequestBody Body;
+        
+        public GetSalesmanRequest() {
+        }
+        
+        public GetSalesmanRequest(WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetSalesmanRequestBody {
+        
+        public GetSalesmanRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetSalesmanResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSalesmanResponse", Namespace="http://tempuri.org/", Order=0)]
+        public WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponseBody Body;
+        
+        public GetSalesmanResponse() {
+        }
+        
+        public GetSalesmanResponse(WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetSalesmanResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public WebServiceInventoryManagement.SalesmanServiceReference.SalesmanBO[] GetSalesmanResult;
+        
+        public GetSalesmanResponseBody() {
+        }
+        
+        public GetSalesmanResponseBody(WebServiceInventoryManagement.SalesmanServiceReference.SalesmanBO[] GetSalesmanResult) {
+            this.GetSalesmanResult = GetSalesmanResult;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -359,6 +427,29 @@ namespace WebServiceInventoryManagement.SalesmanServiceReference {
         
         public SalesmanServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponse WebServiceInventoryManagement.SalesmanServiceReference.SalesmanServiceSoap.GetSalesman(WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest request) {
+            return base.Channel.GetSalesman(request);
+        }
+        
+        public WebServiceInventoryManagement.SalesmanServiceReference.SalesmanBO[] GetSalesman() {
+            WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest inValue = new WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest();
+            inValue.Body = new WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequestBody();
+            WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponse retVal = ((WebServiceInventoryManagement.SalesmanServiceReference.SalesmanServiceSoap)(this)).GetSalesman(inValue);
+            return retVal.Body.GetSalesmanResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponse> WebServiceInventoryManagement.SalesmanServiceReference.SalesmanServiceSoap.GetSalesmanAsync(WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest request) {
+            return base.Channel.GetSalesmanAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponse> GetSalesmanAsync() {
+            WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest inValue = new WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequest();
+            inValue.Body = new WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanRequestBody();
+            return ((WebServiceInventoryManagement.SalesmanServiceReference.SalesmanServiceSoap)(this)).GetSalesmanAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

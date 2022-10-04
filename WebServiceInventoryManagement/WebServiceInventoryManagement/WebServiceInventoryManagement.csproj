@@ -69,17 +69,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\CustomerServiceReference\CustomerService.wsdl" />
-    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.DeleteCustomerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.InsertNewCustomerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.UpdateCustomerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\OrderServiceReference\OrderService.wsdl" />
     <None Include="Connected Services\CustomerServiceReference\CustomerService.disco" />
     <None Include="Connected Services\CustomerServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\CustomerServiceReference\configuration.svcinfo" />
@@ -87,26 +76,29 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.DeleteOrderResponse.datasource">
+    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.CustomerBO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.InsertNewOrderResponse.datasource">
+    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.UpdateOrderResponse.datasource">
+    <None Include="Connected Services\OrderServiceReference\OrderService.disco" />
+    <None Include="Connected Services\OrderServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\OrderServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\OrderServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.GetOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.OrderBO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\SalesmanServiceReference\SalesmanService.disco" />
     <None Include="Connected Services\SalesmanServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\SalesmanServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\SalesmanServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\OrderServiceReference\OrderService.disco" />
-    <None Include="Connected Services\OrderServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\OrderServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\OrderServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -167,6 +159,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage.Master" />
+    <None Include="Connected Services\CustomerServiceReference\CustomerService.wsdl" />
+    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.DeleteCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.InsertNewCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CustomerServiceReference\WebServiceInventoryManagement.CustomerServiceReference.UpdateCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\OrderServiceReference\OrderService.wsdl" />
+    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.DeleteOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.InsertNewOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\OrderServiceReference\WebServiceInventoryManagement.OrderServiceReference.UpdateOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\SalesmanServiceReference\SalesmanService.wsdl" />
     <Content Include="Connected Services\SalesmanServiceReference\WebServiceInventoryManagement.SalesmanServiceReference.DeleteSalesmanResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -175,6 +187,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\SalesmanServiceReference\WebServiceInventoryManagement.SalesmanServiceReference.UpdateSalesmanResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SalesmanServiceReference\WebServiceInventoryManagement.SalesmanServiceReference.GetSalesmanResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SalesmanServiceReference\WebServiceInventoryManagement.SalesmanServiceReference.SalesmanBO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="packages.config" />

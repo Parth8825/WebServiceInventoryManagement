@@ -12,15 +12,56 @@ namespace WebServiceBL
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["InventoryConnectionString"].ConnectionString;
 
+        public List<CustomerBO> GetCustomerData()
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            List<CustomerBO> customer = new List<CustomerBO>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_SelectCustomer", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        CustomerBO customers = new CustomerBO();
+                        customers.CustomerId = Convert.ToInt32(dr["customer_id"]);
+                        customers.CustomerName = (dr["cust_name"]).ToString();
+                        customers.City = (dr["city"]).ToString();
+                        customers.Grade = Convert.ToDouble(dr["grade"]);
+                        customers.SalesId = Convert.ToInt32(dr["salesman_id"]);
+                        customer.Add(customers);
+                    }
+                }
+                return customer;
+            }
+            catch
+            {
+                return customer;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public int InsertCustomer(CustomerBO customer)
         {
             SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                var query = $"insert into customer(customer_id, cust_name, city, grade, salesman_id) values( @CustomerId, '{customer.CustomerName}', '{customer.City}', {customer.Grade}, {customer.SalesId});";
+                SqlCommand cmd = new SqlCommand("sp_InsertCustomer", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@customerId", SqlDbType.Int).Value = customer.CustomerId;
+                cmd.Parameters.Add("@custName", SqlDbType.VarChar).Value = customer.CustomerName;
+                cmd.Parameters.Add("@city", SqlDbType.VarChar).Value = customer.City;
+                cmd.Parameters.Add("@grade", SqlDbType.Int).Value = customer.Grade;
+                cmd.Parameters.Add("@salesmanId", SqlDbType.Int).Value = customer.SalesId;
                 connection.Open();
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@CustomerId", customer.CustomerId);
                 int result = cmd.ExecuteNonQuery();
                 //cmd.Dispose();
                 return result;
@@ -40,10 +81,14 @@ namespace WebServiceBL
             SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                var query = $"update customer set cust_name = '{customer.CustomerName}', city='{customer.City}', grade={customer.Grade}, salesman_id={customer.SalesId} where customer_id= @CustomerId ;";
+                SqlCommand cmd = new SqlCommand("sp_UpdateCustomer", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@customerId", SqlDbType.Int).Value = customer.CustomerId;
+                cmd.Parameters.Add("@custName", SqlDbType.VarChar).Value = customer.CustomerName;
+                cmd.Parameters.Add("@city", SqlDbType.VarChar).Value = customer.City;
+                cmd.Parameters.Add("@grade", SqlDbType.Int).Value = customer.Grade;
+                cmd.Parameters.Add("@salesmanId", SqlDbType.Int).Value = customer.SalesId;
                 connection.Open();
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@CustomerId", customer.CustomerId);
                 int result = cmd.ExecuteNonQuery();
                 //cmd.Dispose();
                 return result;
@@ -63,10 +108,10 @@ namespace WebServiceBL
             SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                var query = $"delete customer where customer_id= @CustomerId ;";
+                SqlCommand cmd = new SqlCommand("sp_DeleteCustomer", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@customerId", SqlDbType.Int).Value = customer.CustomerId;
                 connection.Open();
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@CustomerId", customer.CustomerId);
                 int result = cmd.ExecuteNonQuery();
                 //cmd.Dispose();
                 return result;

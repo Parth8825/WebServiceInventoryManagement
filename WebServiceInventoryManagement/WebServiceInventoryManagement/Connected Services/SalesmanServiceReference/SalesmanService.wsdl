@@ -2,6 +2,29 @@
 <wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetSalesman">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSalesmanResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSalesmanResult" type="tns:ArrayOfSalesmanBO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSalesmanBO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SalesmanBO" nillable="true" type="tns:SalesmanBO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SalesmanBO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SalesmanId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesmanName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Commision" type="s:double" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="InsertNewSalesman">
         <s:complexType>
           <s:sequence>
@@ -9,14 +32,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="SalesmanBO">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="SalesmanId" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="SalesmanName" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Commision" type="s:float" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="InsertNewSalesmanResponse">
         <s:complexType>
           <s:sequence>
@@ -54,6 +69,12 @@
       </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="GetSalesmanSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSalesman" />
+  </wsdl:message>
+  <wsdl:message name="GetSalesmanSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSalesmanResponse" />
+  </wsdl:message>
   <wsdl:message name="InsertNewSalesmanSoapIn">
     <wsdl:part name="parameters" element="tns:InsertNewSalesman" />
   </wsdl:message>
@@ -73,6 +94,10 @@
     <wsdl:part name="parameters" element="tns:DeleteSalesmanResponse" />
   </wsdl:message>
   <wsdl:portType name="SalesmanServiceSoap">
+    <wsdl:operation name="GetSalesman">
+      <wsdl:input message="tns:GetSalesmanSoapIn" />
+      <wsdl:output message="tns:GetSalesmanSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InsertNewSalesman">
       <wsdl:input message="tns:InsertNewSalesmanSoapIn" />
       <wsdl:output message="tns:InsertNewSalesmanSoapOut" />
@@ -88,6 +113,15 @@
   </wsdl:portType>
   <wsdl:binding name="SalesmanServiceSoap" type="tns:SalesmanServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSalesman">
+      <soap:operation soapAction="http://tempuri.org/GetSalesman" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InsertNewSalesman">
       <soap:operation soapAction="http://tempuri.org/InsertNewSalesman" style="document" />
       <wsdl:input>
@@ -118,6 +152,15 @@
   </wsdl:binding>
   <wsdl:binding name="SalesmanServiceSoap12" type="tns:SalesmanServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSalesman">
+      <soap12:operation soapAction="http://tempuri.org/GetSalesman" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InsertNewSalesman">
       <soap12:operation soapAction="http://tempuri.org/InsertNewSalesman" style="document" />
       <wsdl:input>
