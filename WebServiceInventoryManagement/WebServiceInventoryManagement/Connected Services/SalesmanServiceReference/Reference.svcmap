@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="d7111ca3-a204-4054-a238-bbe29b10305e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="93552cf2-f1e1-4cab-9299-c8184fe0991c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:56463/SalesmanService.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SalesmanService.disco" MetadataType="Disco" ID="2a6ee9bd-4760-444e-9750-fe24c08ed73e" SourceId="1" SourceUrl="http://localhost:56463/SalesmanService.asmx?disco" />
-    <MetadataFile FileName="SalesmanService.wsdl" MetadataType="Wsdl" ID="c9b7dfe3-d4f1-4d96-b201-fe27bac70ef4" SourceId="1" SourceUrl="http://localhost:56463/SalesmanService.asmx?wsdl" />
+    <MetadataFile FileName="SalesmanService.disco" MetadataType="Disco" ID="27894871-1ac2-4723-80a3-024f3642404a" SourceId="1" SourceUrl="http://localhost:56463/SalesmanService.asmx?disco" />
+    <MetadataFile FileName="SalesmanService.wsdl" MetadataType="Wsdl" ID="c72a229d-fcad-40e0-98b3-80f0d1beae35" SourceId="1" SourceUrl="http://localhost:56463/SalesmanService.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

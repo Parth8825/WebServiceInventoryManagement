@@ -13,8 +13,6 @@ namespace WebServiceInventoryManagement
 {
     public partial class Customer : System.Web.UI.Page
     {
-        private string _connectionString = ConfigurationManager.ConnectionStrings["InventoryConnectionString"].ConnectionString;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -135,28 +133,17 @@ namespace WebServiceInventoryManagement
 
         private void BindGridView()
         {
-            SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                connection.Open();
-                var query = "select * from customer;";
-                SqlCommand cmd = new SqlCommand(query, connection);
-                DataTable DT = new DataTable();
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(DT);
-
-                if (DT.Rows.Count > 0)
-                {
-                    gvCustomer.DataSource = DT;
-                    gvCustomer.DataBind();
-                }
+                CustomerServiceReference.CustomerServiceSoapClient businessLogic = new CustomerServiceReference.CustomerServiceSoapClient();
+                gvCustomer.DataSource = businessLogic.GetCustomer();
+                gvCustomer.DataBind();
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
                 throw new Exception(message, ex);
             }
-            finally { connection.Close(); }
 
         }
         private void ClearFormFields()
@@ -170,6 +157,7 @@ namespace WebServiceInventoryManagement
             txtCustID.Focus();
 
         }
+      
 
         private void IfCondition(int ifResult, string ifMessage, string messageKey)
         {

@@ -12,7 +12,6 @@ namespace WebServiceInventoryManagement
 {
     public partial class Order : System.Web.UI.Page
     {
-        private string _connectionString = ConfigurationManager.ConnectionStrings["InventoryConnectionString"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,6 +39,7 @@ namespace WebServiceInventoryManagement
                     CustomerId = customerId,
                     SalesmanId = salesmanId,
                 };
+
                 OrderServiceReference.OrderServiceSoapClient businessLogic = new OrderServiceReference.OrderServiceSoapClient();
                 var result = businessLogic.InsertNewOrder(newOrder);
 
@@ -58,8 +58,9 @@ namespace WebServiceInventoryManagement
                 string emptyKey = "Warning";
                 MessageBox(emptyMessage, emptyKey);
             }
-
         }
+
+        
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -78,6 +79,7 @@ namespace WebServiceInventoryManagement
                     CustomerId = customerId,
                     SalesmanId = salesmanId,
                 };
+              
                 OrderServiceReference.OrderServiceSoapClient businessLogic = new OrderServiceReference.OrderServiceSoapClient();
                 var result = businessLogic.UpdateOrder(order);
 
@@ -131,22 +133,11 @@ namespace WebServiceInventoryManagement
 
         private void BindGridView()
         {
-            SqlConnection connection = new SqlConnection(_connectionString);
-
             try
             {
-                connection.Open();
-                var query = "select * from orders;";
-                SqlCommand cmd = new SqlCommand(query, connection);
-                DataTable DT = new DataTable();
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(DT);
-
-                if (DT.Rows.Count > 0)
-                {
-                    gvOrder.DataSource = DT;
-                    gvOrder.DataBind();
-                }
+                OrderServiceReference.OrderServiceSoapClient businessLogic = new OrderServiceReference.OrderServiceSoapClient();
+                gvOrder.DataSource = businessLogic.GetOrder();
+                gvOrder.DataBind();
             }
             catch (Exception ex)
             {
@@ -165,7 +156,7 @@ namespace WebServiceInventoryManagement
             txtDeleteId.Text = "";
             txtOrderNo.Focus();
         }
-
+        
         private void IfCondition(int ifResult, string ifMessage, string messageKey)
         {
             if (ifResult > 0)

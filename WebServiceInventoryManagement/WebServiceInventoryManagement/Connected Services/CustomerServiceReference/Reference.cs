@@ -123,6 +123,13 @@ namespace WebServiceInventoryManagement.CustomerServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CustomerServiceReference.CustomerServiceSoap")]
     public interface CustomerServiceSoap {
         
+        // CODEGEN: Generating message contract since element name GetCustomerResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCustomer", ReplyAction="*")]
+        WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponse GetCustomer(WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCustomer", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponse> GetCustomerAsync(WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest request);
+        
         // CODEGEN: Generating message contract since element name newCustomer from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertNewCustomer", ReplyAction="*")]
         WebServiceInventoryManagement.CustomerServiceReference.InsertNewCustomerResponse InsertNewCustomer(WebServiceInventoryManagement.CustomerServiceReference.InsertNewCustomerRequest request);
@@ -143,6 +150,67 @@ namespace WebServiceInventoryManagement.CustomerServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteCustomer", ReplyAction="*")]
         System.Threading.Tasks.Task<WebServiceInventoryManagement.CustomerServiceReference.DeleteCustomerResponse> DeleteCustomerAsync(WebServiceInventoryManagement.CustomerServiceReference.DeleteCustomerRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetCustomerRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCustomer", Namespace="http://tempuri.org/", Order=0)]
+        public WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequestBody Body;
+        
+        public GetCustomerRequest() {
+        }
+        
+        public GetCustomerRequest(WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetCustomerRequestBody {
+        
+        public GetCustomerRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetCustomerResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCustomerResponse", Namespace="http://tempuri.org/", Order=0)]
+        public WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponseBody Body;
+        
+        public GetCustomerResponse() {
+        }
+        
+        public GetCustomerResponse(WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetCustomerResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public WebServiceInventoryManagement.CustomerServiceReference.CustomerBO[] GetCustomerResult;
+        
+        public GetCustomerResponseBody() {
+        }
+        
+        public GetCustomerResponseBody(WebServiceInventoryManagement.CustomerServiceReference.CustomerBO[] GetCustomerResult) {
+            this.GetCustomerResult = GetCustomerResult;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -374,6 +442,29 @@ namespace WebServiceInventoryManagement.CustomerServiceReference {
         
         public CustomerServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponse WebServiceInventoryManagement.CustomerServiceReference.CustomerServiceSoap.GetCustomer(WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest request) {
+            return base.Channel.GetCustomer(request);
+        }
+        
+        public WebServiceInventoryManagement.CustomerServiceReference.CustomerBO[] GetCustomer() {
+            WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest inValue = new WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest();
+            inValue.Body = new WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequestBody();
+            WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponse retVal = ((WebServiceInventoryManagement.CustomerServiceReference.CustomerServiceSoap)(this)).GetCustomer(inValue);
+            return retVal.Body.GetCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponse> WebServiceInventoryManagement.CustomerServiceReference.CustomerServiceSoap.GetCustomerAsync(WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest request) {
+            return base.Channel.GetCustomerAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebServiceInventoryManagement.CustomerServiceReference.GetCustomerResponse> GetCustomerAsync() {
+            WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest inValue = new WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequest();
+            inValue.Body = new WebServiceInventoryManagement.CustomerServiceReference.GetCustomerRequestBody();
+            return ((WebServiceInventoryManagement.CustomerServiceReference.CustomerServiceSoap)(this)).GetCustomerAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

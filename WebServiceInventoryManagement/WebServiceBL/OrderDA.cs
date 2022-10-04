@@ -12,16 +12,56 @@ namespace WebServiceBL
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["InventoryConnectionString"].ConnectionString;
 
+        public List<OrderBO> GetOrderData()
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            List<OrderBO> order = new List<OrderBO>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_SelectOrder", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                
+                if(dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        OrderBO orders = new OrderBO();
+                        orders.OrderNo = Convert.ToInt32(dr["order_no"]);
+                        orders.PurchAmt = Convert.ToDouble(dr["purch_amt"]);
+                        orders.OrderDate = Convert.ToDateTime(dr["ord_date"]);
+                        orders.CustomerId = Convert.ToInt32(dr["customer_id"]);
+                        orders.SalesmanId = Convert.ToInt32(dr["salesman_id"]);
+                        order.Add(orders);
+                    }
+                }
+                return order;
+            }
+            catch
+            {
+                return order;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
         public int InsertOrder(OrderBO order)
         {
             SqlConnection connection = new SqlConnection(_connectionString);
 
             try
             {
-                var query = $"insert into orders(order_no, purch_amt, ord_date, customer_id, salesman_id) values(@OrderNo, {order.PurchAmt}, '{order.OrderDate.Date}', {order.CustomerId}, {order.SalesmanId});";
+                SqlCommand cmd = new SqlCommand("sp_InsertOrder", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@orderno", SqlDbType.Int).Value = order.OrderNo;
+                cmd.Parameters.Add("@purchAmt", SqlDbType.Decimal).Value = order.PurchAmt;
+                cmd.Parameters.Add("@orderDate", SqlDbType.Date).Value = order.OrderDate;
+                cmd.Parameters.Add("@customerId", SqlDbType.Int).Value = order.CustomerId;
+                cmd.Parameters.Add("@salesmanId", SqlDbType.Int).Value = order.SalesmanId;
                 connection.Open();
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@OrderNo", order.OrderNo);
                 int result = cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 return result;
@@ -41,10 +81,14 @@ namespace WebServiceBL
             SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                var query = $"update orders Set purch_amt={order.PurchAmt}, ord_date={order.OrderDate}, customer_id={order.CustomerId}, salesman_id={order.SalesmanId} where order_no = @OrderNo ;";
+                SqlCommand cmd = new SqlCommand("sp_UpdateOrder", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@orderNo", SqlDbType.Int).Value = order.OrderNo;
+                cmd.Parameters.Add("@purchAmt", SqlDbType.Decimal).Value = order.PurchAmt;
+                cmd.Parameters.Add("@orderDate", SqlDbType.Date).Value = order.OrderDate;
+                cmd.Parameters.Add("@customerId", SqlDbType.Int).Value = order.CustomerId;
+                cmd.Parameters.Add("@salesmanId", SqlDbType.Int).Value = order.SalesmanId;
                 connection.Open();
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@OrderNo", order.OrderNo);
                 int result = cmd.ExecuteNonQuery();
                 //cmd.Dispose();
                 return result;
@@ -64,10 +108,10 @@ namespace WebServiceBL
             SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                var query = $"delete orders where order_no = @OrderNo;";
+                SqlCommand cmd = new SqlCommand("sp_DeleteOrder", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@orderNo", SqlDbType.Int).Value = order.OrderNo;
                 connection.Open();
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@OrderNo", order.OrderNo);
                 int result = cmd.ExecuteNonQuery();
                 //cmd.Dispose();
                 return result;

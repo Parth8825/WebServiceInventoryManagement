@@ -13,7 +13,6 @@ namespace WebServiceInventoryManagement
 {
     public partial class Salesman : System.Web.UI.Page
     {
-        private string _connectionString = ConfigurationManager.ConnectionStrings["InventoryConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -29,7 +28,7 @@ namespace WebServiceInventoryManagement
                 int salesmanID = Convert.ToInt32(txtID.Text);
                 string name = txtSalesmanName.Text;
                 string city = txtCity.Text;
-                float commision = float.Parse(txtCommission.Text);
+                double commision = double.Parse(txtCommission.Text);
 
                 SalesmanServiceReference.SalesmanBO newSalesman = new SalesmanServiceReference.SalesmanBO()
                 {
@@ -59,6 +58,7 @@ namespace WebServiceInventoryManagement
             }
         }
 
+       
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -66,7 +66,7 @@ namespace WebServiceInventoryManagement
                 int salesmanID = Convert.ToInt32(txtID.Text);
                 string name = txtSalesmanName.Text;
                 string city = txtCity.Text;
-                float commision = float.Parse(txtCommission.Text);
+                double commision = double.Parse(txtCommission.Text);
 
                 SalesmanServiceReference.SalesmanBO salesman = new SalesmanServiceReference.SalesmanBO()
                 {
@@ -74,7 +74,7 @@ namespace WebServiceInventoryManagement
                     SalesmanName = name,
                     City = city,
                     Commision = commision
-                };
+                }; 
 
                 SalesmanServiceReference.SalesmanServiceSoapClient businessLogic = new SalesmanServiceReference.SalesmanServiceSoapClient();
                 var result = businessLogic.UpdateSalesman(salesman);
@@ -131,28 +131,17 @@ namespace WebServiceInventoryManagement
 
         private void BindGridView()
         {
-            SqlConnection connection = new SqlConnection(_connectionString);
             try
             {
-                connection.Open();
-                var query = "select * from salesman;";
-                SqlCommand cmd = new SqlCommand(query, connection);
-                DataTable DT = new DataTable();
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(DT);
-
-                if (DT.Rows.Count > 0)
-                {
-                    gvSalesman.DataSource = DT;
-                    gvSalesman.DataBind();
-                }
+                SalesmanServiceReference.SalesmanServiceSoapClient businessLogic = new SalesmanServiceReference.SalesmanServiceSoapClient();
+                gvSalesman.DataSource = businessLogic.GetSalesman();
+                gvSalesman.DataBind();
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
                 throw new Exception(message, ex);
             }
-            finally { connection.Close(); }
 
         }
 

@@ -17,6 +17,20 @@ namespace WebServiceBL
     // [System.Web.Script.Services.ScriptService]
     public class SalesmanService : System.Web.Services.WebService
     {
+        [WebMethod]
+        public List<SalesmanBO> GetSalesman()
+        {
+            List<SalesmanBO> salesman = new List<SalesmanBO>();
+            try
+            {
+                SalesmanDA dataAccess = new SalesmanDA();
+                return dataAccess.GetSalesmanData();
+            }
+            catch
+            {
+                return salesman;
+            }
+        }
 
         [WebMethod]
         public int InsertNewSalesman(SalesmanBO newSalesman)

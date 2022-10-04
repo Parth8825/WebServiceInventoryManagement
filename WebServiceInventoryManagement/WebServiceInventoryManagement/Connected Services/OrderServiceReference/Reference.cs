@@ -121,6 +121,13 @@ namespace WebServiceInventoryManagement.OrderServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OrderServiceReference.OrderServiceSoap")]
     public interface OrderServiceSoap {
         
+        // CODEGEN: Generating message contract since element name GetOrderResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrder", ReplyAction="*")]
+        WebServiceInventoryManagement.OrderServiceReference.GetOrderResponse GetOrder(WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebServiceInventoryManagement.OrderServiceReference.GetOrderResponse> GetOrderAsync(WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest request);
+        
         // CODEGEN: Generating message contract since element name newOrder from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertNewOrder", ReplyAction="*")]
         WebServiceInventoryManagement.OrderServiceReference.InsertNewOrderResponse InsertNewOrder(WebServiceInventoryManagement.OrderServiceReference.InsertNewOrderRequest request);
@@ -141,6 +148,67 @@ namespace WebServiceInventoryManagement.OrderServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteOrder", ReplyAction="*")]
         System.Threading.Tasks.Task<WebServiceInventoryManagement.OrderServiceReference.DeleteOrderResponse> DeleteOrderAsync(WebServiceInventoryManagement.OrderServiceReference.DeleteOrderRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetOrderRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetOrder", Namespace="http://tempuri.org/", Order=0)]
+        public WebServiceInventoryManagement.OrderServiceReference.GetOrderRequestBody Body;
+        
+        public GetOrderRequest() {
+        }
+        
+        public GetOrderRequest(WebServiceInventoryManagement.OrderServiceReference.GetOrderRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetOrderRequestBody {
+        
+        public GetOrderRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetOrderResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetOrderResponse", Namespace="http://tempuri.org/", Order=0)]
+        public WebServiceInventoryManagement.OrderServiceReference.GetOrderResponseBody Body;
+        
+        public GetOrderResponse() {
+        }
+        
+        public GetOrderResponse(WebServiceInventoryManagement.OrderServiceReference.GetOrderResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetOrderResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public WebServiceInventoryManagement.OrderServiceReference.OrderBO[] GetOrderResult;
+        
+        public GetOrderResponseBody() {
+        }
+        
+        public GetOrderResponseBody(WebServiceInventoryManagement.OrderServiceReference.OrderBO[] GetOrderResult) {
+            this.GetOrderResult = GetOrderResult;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -372,6 +440,29 @@ namespace WebServiceInventoryManagement.OrderServiceReference {
         
         public OrderServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WebServiceInventoryManagement.OrderServiceReference.GetOrderResponse WebServiceInventoryManagement.OrderServiceReference.OrderServiceSoap.GetOrder(WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest request) {
+            return base.Channel.GetOrder(request);
+        }
+        
+        public WebServiceInventoryManagement.OrderServiceReference.OrderBO[] GetOrder() {
+            WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest inValue = new WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest();
+            inValue.Body = new WebServiceInventoryManagement.OrderServiceReference.GetOrderRequestBody();
+            WebServiceInventoryManagement.OrderServiceReference.GetOrderResponse retVal = ((WebServiceInventoryManagement.OrderServiceReference.OrderServiceSoap)(this)).GetOrder(inValue);
+            return retVal.Body.GetOrderResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebServiceInventoryManagement.OrderServiceReference.GetOrderResponse> WebServiceInventoryManagement.OrderServiceReference.OrderServiceSoap.GetOrderAsync(WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest request) {
+            return base.Channel.GetOrderAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebServiceInventoryManagement.OrderServiceReference.GetOrderResponse> GetOrderAsync() {
+            WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest inValue = new WebServiceInventoryManagement.OrderServiceReference.GetOrderRequest();
+            inValue.Body = new WebServiceInventoryManagement.OrderServiceReference.GetOrderRequestBody();
+            return ((WebServiceInventoryManagement.OrderServiceReference.OrderServiceSoap)(this)).GetOrderAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
