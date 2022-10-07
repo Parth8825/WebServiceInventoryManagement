@@ -18,9 +18,19 @@ namespace WebServiceInventoryManagement
             if (!Page.IsPostBack)
             {
                 BindGridView();
+                DropDownListData();
             }
         }
 
+        private void DropDownListData()
+        {
+            SalesmanServiceReference.SalesmanServiceSoapClient businessLogic = new SalesmanServiceReference.SalesmanServiceSoapClient();
+            dlSalesmanId.DataSource = businessLogic.GetSalesman();
+            dlSalesmanId.DataTextField = "SalesmanId";
+            dlSalesmanId.DataValueField = "SalesmanId";
+            dlSalesmanId.DataBind();
+            dlSalesmanId.Items.Insert(0, new ListItem("Please Select ID", "0"));
+        }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             try
